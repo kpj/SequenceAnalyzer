@@ -4,14 +4,53 @@
 seq1 = window.prompt("Enter first sequence");
 seq2 = window.prompt("Enter second sequence");
 
+function clean(list, deleteValue) {
+	for (var i = 0; i < list.length; i++) {
+		if (list[i] == deleteValue) {         
+			list.splice(i, 1);
+			i--;
+		}
+	}
+	return list;
+}
+
+function generate_matrix(type) {
+	$.ajax({
+		url: 'matrices/' + type,
+		success: function(data) {
+			var out = {};
+
+			lines = data.split("\n");
+
+			types = lines[0].split(" ");
+			types = clean(types, "");
+
+			for(var l = 1 ; l < lines.length - 1 ; l++) {
+				var cur_values = lines[l].split(" ");
+				cur_values = clean(cur_values, "");
+				var cur_type = cur_values.splice(0,1);
+
+				out[cur_type] = {};
+				for(var t = 0 ; t < types.length ; t++) {
+					out[cur_type][types[t]] = cur_values[t];
+				}
+			}
+			subs_matrix = out; // weird global variable
+
+			start();
+		}
+	});
+}
+
 // which substitution matrix to use
-subs_matrix = [[]];
+//subs_matrix = generate_matrix("BLOSUM62");
+
 // gap penalty
 gap_penalty = 8;
 
 // return value for matching AA pair
 function apply_subs_matrix(c1, c2) {
-	return 1;
+	return parseInt(subs_matrix[c1][c2]);
 }
 
 // entry for matrix
@@ -90,10 +129,7 @@ for(var y = 0 ; y < seq2.length ; y++) {
 
 // recursive score calculation
 function F(x, y) {
-	console.log("Checking: " + x + ":" + y);
 	if(matrix[x][y].value == null) {
-		console.log("Going deeper...");
-
 		var horizontal = F(x - 1, y).value - gap_penalty;
 		var vertical = F(x, y - 1).value - gap_penalty;
 		var diagonal = F(x - 1, y - 1).value + apply_subs_matrix(seq1[x], seq2[y]);
@@ -110,7 +146,6 @@ function F(x, y) {
 			matrix[x][y].fromEntry = F(x - 1, y - 1);
 		}
 	}
-	console.log("Current value: " + matrix[x][y].value);
 	return matrix[x][y];
 }
 
@@ -123,7 +158,7 @@ function get_path(entry) {
 	return [entry].concat(get_path(next));
 }
 
-window.onload = function() {
+function start() {
 	var end = [seq1.length - 1, seq2.length - 1];
 	F(end[0], end[1]);
 
@@ -133,4 +168,8 @@ window.onload = function() {
 	}
 
 	update_html();
+}
+
+window.onload = function() {
+	generate_matrix("BLOSUM62");
 }
