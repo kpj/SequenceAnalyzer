@@ -1,9 +1,31 @@
 <html>
 	<head>
 		<title>3.141</title>
+
+		<link rel="stylesheet" type="text/css" href="css/layout.css" />
+
 		<script src="libs/jquery.js"></script>
+		<script src="data/settings.js"></script>
+		<script src="libs/utils.js"></script>
+		<script src="io/file_handler.js"></script>
+		<script src="ui/html_handler.js"></script>
 		<script src="algorithms/needleman_wunsch.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#init").on("click", function() {
+					generate_matrix("BLOSUM62")
+				});
+			});
+		</script>
 	</head>
 	<body>
+		<div id="input">
+			First sequence: <input type="text" id="seq1" /><br />
+			Second sequence: <input type="text" id="seq2" /><br />
+			<input type="button" value="Do the math!" id="init" />
+		</div>
+		<div id="output">
+			:-)
+		</div>
 	</body>
 </html>
