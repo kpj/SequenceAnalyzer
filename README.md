@@ -1,4 +1,4 @@
 SequenceAnalyzer
 ================
 
-Tool for bio informatics related stuff
+Tool for bioinformatics related stuff
