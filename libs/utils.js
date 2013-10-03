@@ -7,3 +7,7 @@ function clean(list, deleteValue) {
 	}
 	return list;
 }
+
+function rmWhiteSpace(str) {
+	return str.replace(/\s/g, '');
+}

@@ -20,10 +20,10 @@ var matrix = [];
 function parse_matrix() {
 	matrix = [];
 	for(var x = 0 ; x < seq1.length ; x++) {
-		var cur = new Entry(0, x, 0);
+		var cur = new Entry( - x * gap_penalty, x, 0);
 		matrix.push([cur]);
 		for(var y = 1 ; y < seq2.length ; y++) {
-			matrix[matrix.length - 1].push(new Entry((x == 0) ? 0 : null, x, y));
+			matrix[matrix.length - 1].push(new Entry((x == 0) ? - y * gap_penalty : null, x, y));
 		}
 	}
 	// link initial values
@@ -70,8 +70,8 @@ function get_path(entry) {
 }
 
 function apply_needleman_wunsch() {
-	seq1 = $("#seq1").val().toUpperCase();
-	seq2 = $("#seq2").val().toUpperCase();
+	seq1 = rmWhiteSpace($("#seq1").val().toUpperCase());
+	seq2 = rmWhiteSpace($("#seq2").val().toUpperCase());
 
 	parse_matrix();
 
