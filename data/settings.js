@@ -2,7 +2,7 @@
 gap_penalty = 8;
 
 // substitution matrix to use
-subst_matrix_name = ""
+subst_matrix_name = "";
 
 
 // retrieves new values/sets default ones if necessary

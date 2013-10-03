@@ -1,4 +1,4 @@
-#input, #output, #options {
+#input, #table_output, #alignment_output, #options {
 	border: 1px;
 	border-style: dashed;
 
@@ -10,4 +10,13 @@
 	margin-top: 2px;
 
 	text-align: center;
+}
+
+#alignment_output {
+	font-size: 3em;
+	letter-spacing: 2px;
+}
+
+table {
+	margin: 0 auto;
 }
