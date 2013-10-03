@@ -11,3 +11,11 @@ function clean(list, deleteValue) {
 function rmWhiteSpace(str) {
 	return str.replace(/\s/g, '');
 }
+
+function get_anchor() {
+	return window.location.hash.substring(1);
+}
+function set_anchor(strl) {
+	console.log("update anchor");
+	window.location.hash = strl.join(":");
+}

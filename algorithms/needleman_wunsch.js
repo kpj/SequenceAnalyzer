@@ -84,4 +84,7 @@ function apply_needleman_wunsch() {
 	}
 
 	update_html();
+
+	// update url anchor
+	set_anchor([seq1, seq2]);
 }

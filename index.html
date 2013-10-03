@@ -31,13 +31,22 @@
 						$("#init").click();
 					}
 				});
+
+				// check url anchor
+				var anc = get_anchor();
+				if(anc != "") {
+					$("#seq1").val(anc.split(":")[0]);
+					$("#seq2").val(anc.split(":")[1]);
+
+					$("#init").click();
+				}
 			});
 		</script>
 	</head>
 	<body>
 		<div id="input">
-			First sequence: <input type="text" id="seq1" value="AGACTAGTTAC" /><br />
-			Second sequence: <input type="text" id="seq2" value="CGAGACGT" /><br />
+			First sequence: <input type="text" id="seq1" /><br />
+			Second sequence: <input type="text" id="seq2" /><br />
 			<input type="button" value="Do the math!" id="init" />
 		</div>
 		<div id="options">
