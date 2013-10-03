@@ -12,8 +12,24 @@
 		<script src="algorithms/needleman_wunsch.js"></script>
 		<script>
 			$(document).ready(function() {
+				// handle settings
+				update_settings();
+				$("#options").children("input").each(function(i) {
+					$(this).on("change", function() {
+						update_settings();
+					});
+				});
+
+				// init algorithm on click
 				$("#init").on("click", function() {
 					generate_matrix("BLOSUM62")
+				});
+
+				// improve usability
+				$("body").keyup(function(event) {
+					if(event.keyCode == 13) {
+						$("#init").click();
+					}
 				});
 			});
 		</script>
@@ -23,6 +39,9 @@
 			First sequence: <input type="text" id="seq1" /><br />
 			Second sequence: <input type="text" id="seq2" /><br />
 			<input type="button" value="Do the math!" id="init" />
+		</div>
+		<div id="options">
+			gap penalty: <input type="text" id="gap_penalty"><br>
 		</div>
 		<div id="output">
 			:-)
