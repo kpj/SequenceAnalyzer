@@ -14,7 +14,7 @@
 			$(document).ready(function() {
 				// handle settings
 				update_settings();
-				$("#options").children("input").each(function(i) {
+				$("#options").children().each(function(i) {
 					$(this).on("change", function() {
 						update_settings();
 					});
@@ -22,7 +22,7 @@
 
 				// init algorithm on click
 				$("#init").on("click", function() {
-					generate_matrix("BLOSUM62")
+					generate_matrix(subst_matrix_name);
 				});
 
 				// improve usability
@@ -42,6 +42,10 @@
 		</div>
 		<div id="options">
 			gap penalty: <input type="text" id="gap_penalty"><br>
+			matrix: <select id="subst_matrix_name" type="dropdown">
+				<option value="PAM250">PAM250</option>
+				<option value="BLOSUM62">BLOSUM62</option>
+			</select>
 		</div>
 		<div id="output">
 			:-)
