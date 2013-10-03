@@ -34,7 +34,7 @@
 
 				// check url anchor
 				var anc = get_anchor();
-				if(anc != "") {
+				if(anc != "" && anc.indexOf(":") != -1) {
 					$("#seq1").val(anc.split(":")[0]);
 					$("#seq2").val(anc.split(":")[1]);
 

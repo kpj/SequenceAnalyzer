@@ -73,6 +73,11 @@ function apply_needleman_wunsch() {
 	seq1 = rmWhiteSpace($("#seq1").val().toUpperCase());
 	seq2 = rmWhiteSpace($("#seq2").val().toUpperCase());
 
+	if(seq1.length == 0 | seq2.length == 0) {
+		console.log("Invalid sequences");
+		return;
+	}
+
 	parse_matrix();
 
 	var end = [seq1.length - 1, seq2.length - 1];
